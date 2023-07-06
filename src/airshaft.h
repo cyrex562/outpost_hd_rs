@@ -1,0 +1,38 @@
+#pragma once
+
+#include "structure.h"
+
+#include "numbers.h"
+#include "strings.h"
+
+
+class AirShaft : public Structure
+{
+public:
+	AirShaft() : Structure(
+		constants::StructureStateOperational,
+		StructureClass::Tube,
+		StructureID::SID_AIR_SHAFT)
+	{
+		connectorDirection(ConnectorDir::CONNECTOR_VERTICAL);
+
+		state(StructureState::Operational);
+	}
+
+	void ug()
+	{
+		sprite().play(constants::StructureStateOperationalUg);
+		mIsUnderground = true;
+	}
+
+	void forced_state_change(StructureState, DisabledReason, IdleReason) override
+	{
+		if (mIsUnderground)
+		{
+			return;
+		}
+	}
+
+private:
+	bool mIsUnderground = false;
+};
