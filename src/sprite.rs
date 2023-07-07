@@ -2,6 +2,8 @@ use crate::animation_set::AnimationSet;
 use crate::color::Color;
 use crate::frame::Frame;
 
+type AnimationCompleteSignal = Signal<()>;
+
 #[derive(Default,Debug,Clone)]
 pub struct Sprite<'a>
 {

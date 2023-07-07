@@ -9,6 +9,7 @@ mod map_object;
 mod frame;
 mod animation_set;
 mod sprite;
+mod timer;
 
 fn main() {
     println!("Hello, world!");
