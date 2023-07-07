@@ -1,6 +1,7 @@
-mod agridome_h;
-mod foodproduction_h;
 mod storable_resources;
+mod agridome;
+mod foodproduction;
+mod structure;
 
 fn main() {
     println!("Hello, world!");
