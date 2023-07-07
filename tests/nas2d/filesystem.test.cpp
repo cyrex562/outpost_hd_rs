@@ -1,7 +1,7 @@
-#include "NAS2D/Filesystem.h"
+// #include"NAS2D/Filesystem.h"
 
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
+// #include<gtest/gtest.h>
+// #include<gmock/gmock.h>
 
 
 TEST(FilesystemStatic, dirSeparator) {

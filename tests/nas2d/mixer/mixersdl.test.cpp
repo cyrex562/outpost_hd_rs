@@ -1,6 +1,6 @@
-#include "NAS2D/Mixer/MixerSDL.h"
+// #include"NAS2D/Mixer/MixerSDL.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
 
 TEST(MixerSDL, InvalidToDefault) {

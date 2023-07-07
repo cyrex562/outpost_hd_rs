@@ -1,0 +1,100 @@
+// #pragma once
+
+// #include"renderer.h"
+// #include"color.h"
+// #include"point.h"
+// #include"rectangle.h"
+// #include"vector.h"
+// #include"stringvalue.h"
+
+// #include<string>
+// #include<vector>
+// #include<cstddef>
+
+
+// Draw a 2 dimensional table of text. Determine cell size based on inserted text, font, and padding. Only allows one line of text per cell.
+class StringTable
+{
+public:
+	using CellCoordinate = NAS2D::Point<std::size_t>;
+
+	enum class Justification
+	{
+		Left,
+		Right,
+		Center
+	};
+
+	struct Cell
+	{
+		// Set textColor to ColorEmpty to indicate cell should use default StringTable color
+		static const NAS2D::Color ColorEmpty;
+
+		// Use StringTable::mDefaultFont if not set
+		const NAS2D::Font* font = nullptr;
+		std::string text;
+		Justification justification = Justification::Left;
+		NAS2D::Color textColor = ColorEmpty;
+	};
+
+	Cell& operator[](const CellCoordinate& coordinate);
+
+	// Set default fonts in constructor
+	StringTable(std::size_t columns, std::size_t rows);
+
+	void draw(NAS2D::Renderer& renderer) const;
+
+	void position(NAS2D::Point<int> position);
+	NAS2D::Point<int> position() const;
+	const NAS2D::Rectangle<int>& screenRect() const;
+
+	void setDefaultFont(NAS2D::Font& font);
+	void setDefaultTitleFont(const NAS2D::Font* font);
+	void setDefaultTextColor(NAS2D::Color textColor);
+
+	const NAS2D::Font* GetDefaultFont() const;
+	const NAS2D::Font* GetDefaultTitleFont() const;
+	NAS2D::Color GetDefaultFontColor() const;
+
+	void setHorizontalPadding(int horizontalPadding);
+	void setVerticalPadding(int verticalPadding);
+
+	void setColumnText(std::size_t column, const std::vector<NAS2D::StringValue>& rows);
+	void setRowText(std::size_t row, const std::vector<NAS2D::StringValue>& columns);
+	void setColumnJustification(std::size_t column, Justification justification);
+
+	void setColumnFont(std::size_t column, const NAS2D::Font* const font);
+	void setRowFont(std::size_t row, const NAS2D::Font* const font);
+
+	// Call after updating table properties to recompute cell positions
+	void computeRelativeCellPositions();
+
+private:
+	// Purposely hide textOffset from public access
+	struct CellWithPosition : Cell
+	{
+		// Position relative to the StringTable's position
+		NAS2D::Vector<int> textOffset;
+	};
+
+	std::vector<CellWithPosition> mCells;
+	const std::size_t mColumnCount;
+	const std::size_t mRowCount;
+	NAS2D::Rectangle<int> mScreenRect;
+	const NAS2D::Font* mDefaultFont;
+	const NAS2D::Font* mDefaultTitleFont;
+	NAS2D::Color mDefaultTextColor = NAS2D::Color::White;
+	int mHorizontalPadding = 5;
+	int mVerticalPadding = 0;
+
+	void accountForCellJustification(std::size_t index, int columnWidth);
+	std::vector<int> computeColumnWidths() const;
+	std::vector<int> computeRowHeights() const;
+
+	std::size_t getCellIndex(const CellCoordinate& cellCoordinate) const;
+	CellCoordinate getCellCoordinate(std::size_t index) const;
+	void checkCellIndex(const CellCoordinate& cellCoordinate) const;
+
+	const NAS2D::Font* getCellFont(std::size_t index) const;
+	bool isFirstColumn(std::size_t index) const;
+};

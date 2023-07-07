@@ -29,3 +29,7 @@ x64/
 /xcode/OutpostHD.xcodeproj/project.xcworkspace/xcuserdata/
 
 cmake-build-debug/
+
+# Added by cargo
+
+/target

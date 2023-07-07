@@ -1,6 +1,6 @@
-#include "NAS2D/Renderer/Color.h"
+// #include"NAS2D/Renderer/Color.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
 
 TEST(Color, OperatorCompare) {

@@ -1,7 +1,7 @@
-#include "NAS2D/Resource/Sprite.h"
+// #include"NAS2D/Resource/Sprite.h"
 
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
+// #include<gtest/gtest.h>
+// #include<gmock/gmock.h>
 
 
 class Sprite : public ::testing::Test {

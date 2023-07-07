@@ -1,6 +1,6 @@
-#include "NAS2D/Resource/ResourceCache.h"
+// #include"NAS2D/Resource/ResourceCache.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
 
 TEST(ResourceCache, load) {

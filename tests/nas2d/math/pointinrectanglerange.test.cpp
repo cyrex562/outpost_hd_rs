@@ -1,8 +1,8 @@
-#include "NAS2D/Math/PointInRectangleRange.h"
+// #include"NAS2D/Math/PointInRectangleRange.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
-#include <vector>
+// #include<vector>
 
 
 TEST(PointInRectangleRange, Iteration) {

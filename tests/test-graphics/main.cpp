@@ -8,15 +8,15 @@
 // = Acknowledgment of your use of NAS2D is appreciated but is not required.
 // ==================================================================================
 
-#include "testgraphics.h"
+// #include"testgraphics.h"
 
-#include <NAS2D/Game.h>
-#include <NAS2D/Utility.h>
-#include <NAS2D/Configuration.h>
-#include <NAS2D/Dictionary.h>
+// #include<NAS2D/Game.h>
+// #include<NAS2D/Utility.h>
+// #include<NAS2D/Configuration.h>
+// #include<NAS2D/Dictionary.h>
 
-#include <iostream>
-#include <string>
+// #include<iostream>
+// #include<string>
 
 
 int main()

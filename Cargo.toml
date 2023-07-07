@@ -1,0 +1,26 @@
+[package]
+name = "outpost_hd_rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+[dependencies.sdl2]
+# git = "https://github.com/Rust-SDL2/rust-sdl2"
+# rev = "571085aee601daffc51d543441c983409088fce2"
+version = "0.35.0"
+default-features = false
+features = ["ttf","image","gfx","mixer", "static-link", "use-vcpkg"]
+
+[package.metadata.vcpkg]
+dependencies = ["sdl2", "sdl2-image[libjpeg-turbo,tiff,libwebp]", "sdl2-ttf", "sdl2-gfx", "sdl2-mixer"]
+git = "https://github.com/microsoft/vcpkg"
+rev = "f6a5d4e8eb7476b8d7fc12a56dff300c1c986131"
+
+[package.metadata.vcpkg.target]
+x86_64-pc-windows-msvc = { triplet = "x64-windows-static-md" }
+
+[dependencies]
+lazy_static = "1.4.0"
+

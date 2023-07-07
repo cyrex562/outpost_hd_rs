@@ -1,7 +1,7 @@
-#include "NAS2D/Dictionary.h"
+// #include"NAS2D/Dictionary.h"
 
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
+// #include<gmock/gmock.h>
+// #include<gtest/gtest.h>
 
 
 TEST(Dictionary, ConstructorInitialEntries) {

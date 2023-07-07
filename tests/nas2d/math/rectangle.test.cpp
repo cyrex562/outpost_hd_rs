@@ -1,6 +1,6 @@
-#include "NAS2D/Math/Rectangle.h"
+// #include"NAS2D/Math/Rectangle.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
 
 TEST(Rectangle, CreatePointPoint) {

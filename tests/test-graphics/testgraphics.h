@@ -1,8 +1,8 @@
-#pragma once
+// #pragma once
 
-#include "NAS2D/State.h"
-#include "NAS2D/EventHandler.h"
-#include "NAS2D/Resource/Image.h"
+// #include"NAS2D/State.h"
+// #include"NAS2D/EventHandler.h"
+// #include"NAS2D/Resource/Image.h"
 
 
 class TestGraphics : public NAS2D::State

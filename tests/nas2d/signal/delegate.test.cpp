@@ -1,7 +1,7 @@
-#include "NAS2D/Signal/Delegate.h"
+// #include"NAS2D/Signal/Delegate.h"
 
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
+// #include<gtest/gtest.h>
+// #include<gmock/gmock.h>
 
 
 namespace {

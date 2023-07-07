@@ -1,8 +1,8 @@
-#include "NAS2D/Math/VectorSizeRange.h"
+// #include"NAS2D/Math/VectorSizeRange.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
-#include <vector>
+// #include<vector>
 
 
 TEST(VectorSizeRange, Iteration) {

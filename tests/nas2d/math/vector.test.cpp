@@ -1,8 +1,8 @@
-#include "NAS2D/Math/Vector.h"
+// #include"NAS2D/Math/Vector.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
-#include <type_traits>
+// #include<type_traits>
 
 
 TEST(Vector, Aggregate) {

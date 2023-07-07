@@ -1,6 +1,6 @@
-#include "NAS2D/Renderer/DisplayDesc.h"
+// #include"NAS2D/Renderer/DisplayDesc.h"
 
-#include <gtest/gtest.h>
+// #include<gtest/gtest.h>
 
 
 TEST(DisplayDesc, OperatorEqual) {

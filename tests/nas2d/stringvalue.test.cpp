@@ -1,10 +1,10 @@
-#include "NAS2D/StringValue.h"
+// #include"NAS2D/StringValue.h"
 
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
+// #include<gmock/gmock.h>
+// #include<gtest/gtest.h>
 
-#include <vector>
-#include <map>
+// #include<vector>
+// #include<map>
 
 
 TEST(StringValue, ContainerInitialization) {

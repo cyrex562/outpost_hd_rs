@@ -1,11 +1,11 @@
-#include "testgraphics.h"
+// #include"testgraphics.h"
 
-#include <NAS2D/Utility.h>
-#include <NAS2D/Renderer/Renderer.h>
-#include <NAS2D/Math/Rectangle.h>
+// #include<NAS2D/Utility.h>
+// #include<NAS2D/Renderer/Renderer.h>
+// #include<NAS2D/Math/Rectangle.h>
 
-#include <functional>
-#include <random>
+// #include<functional>
+// #include<random>
 
 
 namespace
