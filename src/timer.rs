@@ -15,7 +15,7 @@ impl Timer{
 
     pub fn new(start_tick: Option<u32>) -> Self
     {
-        let ticks = start_tick.unwrap_or(Self::tick())
+        let ticks = start_tick.unwrap_or(Self::tick());
         Self {
             start_tick: ticks,
         }

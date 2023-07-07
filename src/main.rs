@@ -10,6 +10,8 @@ mod frame;
 mod animation_set;
 mod sprite;
 mod timer;
+mod point;
+mod vector_2d;
 
 fn main() {
     println!("Hello, world!");
