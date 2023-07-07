@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use lazy_static::lazy_static;
+use crate::storable_resources::StorableResources;
 
 pub enum StructureState {
     UnderConstruction,

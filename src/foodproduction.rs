@@ -2,6 +2,8 @@
 
 // #include"structure.h"
 
+use crate::structure::{Structure, StructureClass};
+
 /**
 * Virtual class for structures whose primary purpose is agricultural production
 *
