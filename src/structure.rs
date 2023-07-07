@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use lazy_static::lazy_static;
 use crate::color;
 use crate::color::Color;
+use crate::population_requirements::PopulationRequirements;
 use crate::storable_resources::StorableResources;
 use crate::structure_type::StructureType;
 
