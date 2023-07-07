@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 use lazy_static::lazy_static;
+use crate::color;
+use crate::color::Color;
 use crate::storable_resources::StorableResources;
+use crate::structure_type::StructureType;
 
 pub enum StructureState {
     UnderConstruction,
@@ -41,7 +44,6 @@ University,
 Warehouse
 }
 
-pub struct StructureType;
 
 #[derive(Default,Debug,Clone)]
 pub struct Structure
@@ -78,7 +80,7 @@ impl Structure {
 
     pub fn disable(&mut self, reason: DisabledReason) {
         self.map_object.sprite().pause();
-        self.map_object.sprite().color(Color(255,0,0,185));
+        self.map_object.sprite().color(Color::new(255,0,0,185));
         self.structure_state = StructureState::Disabled;
         self.disabled_reason = reason;
         self.idle_reason = IdleReason::None;
@@ -86,25 +88,26 @@ impl Structure {
     }
 
     pub fn enable(&mut self) {
-        if self.force_idle() {
+        if self.force_idle(false) {
             self.idle(IdleReason::PlayerSet);
             return;
         }
 
         self.map_object.sprite().resume();
-        self.map_object.sprite().color(Color::White);
+        self.map_object.sprite().color(color::White);
         self.structure_state = StructureState::Operational;
         self.disabled_reason = DisabledReason::None;
         self.idle_reason = Idlereason::None;
     }
 
     pub fn idle(&mut self, reason: IdleReason) {
-        if self.force_idle() && self.disabled() == false {
+        self.force_idle(false);
+        if  self.structure_state != StructureState::Disabled {
             return;
         }
 
         self.map_object.sprite().pause();
-        self.map_object.sprite().color(Color(255,255,255,185));
+        self.map_object.sprite().color(Color::new(255,255,255,185));
         self.disabled_reason = DisabledReason::None;
         self.idle_reason = reason;
         self.structure_state = StructureState::Idle;
@@ -121,8 +124,8 @@ impl Structure {
         }
     }
 
-    pub fn resources_in(&mut self) -> &const StorableResources {
-
+    pub fn resources_in(&mut self) -> &StorableResources {
+        self.structure_type.operational_cost
     }
 }
 

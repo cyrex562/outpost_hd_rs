@@ -12,6 +12,14 @@ pub struct Color
 
 impl Color
 {
+    pub fn new(red: u8, green: u8, blue: u8, alpha: u8) -> Self {
+        Self {
+            red,
+            green,
+            blue,
+            alpha
+        }
+    }
     pub fn alpha_fade(&mut self, new_alpha: u8) -> Color
     {
         Color{
