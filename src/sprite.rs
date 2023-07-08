@@ -2,6 +2,7 @@ use sdl2::hint::Hint::Default;
 use crate::animation_set::AnimationSet;
 use crate::color::Color;
 use crate::frame::Frame;
+use crate::point::Point;
 use crate::timer::Timer;
 
 type AnimationCompleteSignal = Signal<()>;
@@ -49,5 +50,66 @@ impl Sprite {
     pub fn origin(&mut self, point: Point<i32>) -> Point<i32>
     {
         point - self.current_action[self.current_frame].anchor_offset.clone()
+    }
+
+    pub fn actions(&mut self) -> Vec<String> {
+        self.animation_set.action_names()
+    }
+
+    pub fn play(&mut self, action: &str)
+    {
+        self.current_action = self.animation_set.frames(action);
+        self.current_frame = 0;
+        self.timer.reset();
+        self.resume();
+    }
+
+    pub fn pause(&mut self) {
+        self.paused = true;
+    }
+
+    pub fn resume(&mut self) {
+        self.paused = false;
+    }
+
+    pub fn set_frame(&mut self, frame_index: usize) {
+        self.current_frame = frame_index % self.current_action.len();
+    }
+
+    pub fn update(&mut self) {
+        self.timer.adjust_start_tick((advance_time_by_delta(self.timer.elapsed_ticks())));
+    }
+
+    pub fn draw(&mut self, position: Point<f64>) {
+        let frame = self.current_action[self.current_frame].clone();
+        let draw_position = position - frame.anchor_offset.into();
+        let frame_bounds = frame.bounds.into();
+        // Utility<Renderer>::get().drawSubImageRotated(frame.image, drawPosition, frameBounds, mRotationAngleDegrees, mTintColor);
+        // TODO
+    }
+
+    pub fn advance_time_by_delta(&mut self, time_delta: u32) -> u32
+    {
+        let mut accumulator = 0u32;
+        if self.paused {
+            return accumulator;
+        }
+
+        loop {
+            let frame = &mut self.current_action[self.current_frame];
+            if frame.is_stop_frame() {
+                self.animation_complete_signal = true;
+            }
+            if time_delta - accumulator < frame.frame_delay {
+                return accumulator;
+            }
+
+            accumulator += frame.frame_delay;
+            self.current_frame += 1;
+            if self.current_frame >= self.current_action.len() {
+                self.current_frame = 0;
+                self.animation_complete_signal = true;
+            }
+        }
     }
 }
