@@ -12,6 +12,9 @@ mod sprite;
 mod timer;
 mod point;
 mod vector_2d;
+mod signal;
+mod signal_source;
+mod delegate;
 
 fn main() {
     println!("Hello, world!");

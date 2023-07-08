@@ -2,12 +2,14 @@
 
 // type DieSignal = Signal<MapObject>;
 
+use crate::sprite::Sprite;
+
 #[derive(Default,Debug,Clone)]
-pub struct MapObject
+pub struct MapObject<'a>
 {
     pub name: String,
-    pub sprite: Sprite,
-    pub die_signal: Signal<MapObject>,
+    pub sprite: Sprite<'a>,
+    pub die_signal: Signal<MapObject<'a>>,
     pub is_dead: bool
 }
 
@@ -15,8 +17,8 @@ impl MapObject
 {
     pub fn new(name: &str, sprite_path: &str, initial_action: &str) -> Self {
         Self {
-            name,
-            sprite: Sprite::new(sprite_path, initial_action),
+            name: name.to_string(),
+            sprite: Sprite::new(None, None,sprite_path, initial_action),
             ..Default::default()
         }
     }
