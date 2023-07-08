@@ -2,6 +2,7 @@
 
 // type DieSignal = Signal<MapObject>;
 
+use crate::signal::Signal;
 use crate::sprite::Sprite;
 
 #[derive(Default,Debug,Clone)]
@@ -29,8 +30,8 @@ impl MapObject
         self.die_signal(self);
     }
 
-    pub fn on_die(&mut self) -> Signal<MapObject>
+    pub fn on_die(&mut self) -> &mut Signal<MapObject>
     {
-        self.die_signal
+        &mut self.die_signal
     }
 }
