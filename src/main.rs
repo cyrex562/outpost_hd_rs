@@ -17,6 +17,7 @@ mod signal_source;
 mod delegate;
 mod common;
 mod rectangle;
+mod strings;
 
 fn main() {
     println!("Hello, world!");
