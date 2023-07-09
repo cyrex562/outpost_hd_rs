@@ -36,6 +36,14 @@ impl Point<T>
             y: self.x as U
         }
     }
+
+    pub fn add_vector(&mut self, vector: &Vector2D<T>) -> Point<T>
+    {
+        Self {
+            x: self.x + vector.x,
+            y: self.y + vector.y
+        }
+    }
 }
 
 impl Into<U> for Point<T>

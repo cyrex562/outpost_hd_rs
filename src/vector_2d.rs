@@ -1,4 +1,5 @@
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
+use crate::point::Point;
 
 #[derive(Default,Debug,Clone,PartialOrd, PartialEq)]
 pub struct Vector2D<T> {
@@ -8,6 +9,14 @@ pub struct Vector2D<T> {
 
 impl Vector2D<T>
 {
+    pub fn from_point(point: &Point<T>) -> Self
+    {
+        Self {
+            x: point.x,
+            y: point.y
+        }
+    }
+
     pub fn skew_by(&mut self, other: &Vector2D<T>) -> Vector2D<T>
     {
         Self {

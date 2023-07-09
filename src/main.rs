@@ -15,6 +15,8 @@ mod vector_2d;
 mod signal;
 mod signal_source;
 mod delegate;
+mod common;
+mod rectangle;
 
 fn main() {
     println!("Hello, world!");
