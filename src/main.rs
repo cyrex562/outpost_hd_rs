@@ -24,6 +24,7 @@ mod renderer;
 mod window;
 mod ui_container;
 mod control;
+mod font;
 
 fn main() {
     println!("Hello, world!");

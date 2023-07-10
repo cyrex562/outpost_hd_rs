@@ -1,3 +1,4 @@
+use crate::app_context::AppContext;
 use crate::point::Point;
 use crate::rectangle::Rectangle;
 use crate::signal::Signal;
@@ -54,12 +55,14 @@ impl Control {
     }
 
     pub fn show(&mut self) {
-        self.visible(true)
+        self.visible(true);
     }
 
     pub fn position(&mut self) -> Point<i32> {
-        self.rect.position.clone()
+        self.rect.position.clone();
     }
 
-    pub fn 
+    pub fn set_default_font(&mut self, ctx: &mut AppContext, font: &mut Font) {
+        self.ctx.default_font = font;
+    }
 }
