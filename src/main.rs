@@ -24,6 +24,7 @@ mod renderer;
 mod window;
 mod ui_container;
 mod control;
+mod airshaft;
 
 fn main() {
     println!("Hello, world!");

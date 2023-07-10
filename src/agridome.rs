@@ -7,6 +7,10 @@
 // #include<algorithm>
 
 
+use crate::common::{IdleReason, StructureID};
+use crate::foodproduction::FoodProduction;
+use crate::structure::StructureClass;
+
 pub const AGRIDOME_CAPACITY: i32 = 1000;
 pub const AGRIDOME_BASE_PRODUCUCTION: i32 = 10;
 //
