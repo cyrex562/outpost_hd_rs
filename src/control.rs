@@ -65,4 +65,7 @@ impl Control {
     pub fn set_default_font(&mut self, ctx: &mut AppContext, font: &mut Font) {
         self.ctx.default_font = font;
     }
+    pub fn draw(&mut self) {
+        todo!()
+    }
 }
