@@ -1,8 +1,16 @@
 // enum class StructureState;
 
+use lazy_static::lazy_static;
 use sdl2::rect::Rect;
+use crate::app_context::AppContext;
 use crate::color::Color;
+use crate::point::Point;
+use crate::rectangle::Rectangle;
+use crate::save_game::SaveGame;
+use crate::strings::STR_Warehouse;
+use crate::structure::StructureClass::Warehouse;
 use crate::structure::StructureState;
+use crate::vector_2d::Vector2D;
 
 pub enum Difficulty {
     Beginner,
@@ -138,9 +146,144 @@ pub const ResourceNamesOre: [&str;4] = [
     "Rare Minerals Ore"
 ];
 
-pub const ResourceImageRectsRefined: [Rect<i32>;4] = [
-    Rect
-]
+pub const ResourceImageRectsRefined: [Rectangle<i32>;4] = [
+    Rectangle{ position: Point { x: 64, y: 16 }, size: Vector2D {x: 16, y: 16} },
+    Rectangle{position: Point {x: 96, y: 16}, size: Vector2D{x: 16, y: 16}},
+    Rectangle{position: Point{x: 80, y: 16}, size: Vector2D{x: 16, y: 16}},
+    Rectangle{position: Point{x: 112, y: 16}, size: Vector2D{x: 16, y: 16}}
+];
+
+pub const ResourceImageRectsOre: [Rectangle<i32>;4] = [
+  Rectangle{ position: Point { x: 64, y: 0 }, size: Vector2D { x: 16, y: 16 } },
+    Rectangle{ position: Point { x: 96, y: 0 }, size: Vector2D { x: 16, y: 16 } },
+    Rectangle{ position: Point { x: 80, y: 0 }, size: Vector2D { x: 16, y: 16 } },
+    Rectangle{ position: Point { x: 112, y: 0 }, size: Vector2D { x: 16, y: 16 } }
+];
+
+// lazy_static!{
+//     static ref STRUCTURE_STATE_TRANSLATION: HashMap<StructureState,&'static str> = {
+//         let mut m = HashMap::new();
+//         m.insert(StructureState::UnderConstruction, "Under Construction");
+//         m.insert(StructureState::Operational, "Operational");
+//         m.insert(StructureState::Idle, "Idle");
+//         m.insert(StructureState::Disabled, "Disabled");
+//         m.insert(StructureState::Destroyed, "Destroyed");
+//         m
+//     };
+// }
+lazy_static!{
+    static ref IntersectionPatternTable: HashMap<[bool;4], &str> = {
+        let mut m = HashMap::new();
+        m.insert([true,false,true,false], "left");
+        m.insert([true,false,false,false], "left");
+        m.insert([false,false,true,false], "left");
+        m.insert([false,true,false,true], "right");
+        m.insert([false,true,false,false], "right");
+        m.insert([false,false,false,true], "right");
+        m.insert([false,false,false,false], "intersection");
+        m.insert([true,true,false,false], "intersection");
+        m.insert([false,false,true,true], "intersection");
+        m.insert([false, true,true,true], "intersection");
+        m.insert([true,true,true,false], "intersection");
+        m.insert([true,true,true,true], "intersection");
+        m.insert([true,false,false,true], "intersection");
+        m.insert([false,true,true,false], "intersection");
+        m.insert([false,true,true,true], "intersection");
+        m.insert([true,false,true,true], "intersection");
+        m.insert([true,true,false,true], "intersection");
+        m.insert([true,true,true,false],"intersection");
+    };
+}
+
+pub fn disabled_reason(disabled_reason: DisabledReason) -> &'static str {
+    match disabled_reason {
+        DisabledReason::None => "None",
+        DisabledReason::Chap => "CHAP",
+        DisabledReason::Disconnected => "Disconnected",
+        DisabledReason::Energy => "Energy",
+        DisabledReason::Population => "Population",
+        DisabledReason::RefinedResources => "Refined Resources",
+        DisabledReason::StructuralIntegrity => "Structural Integrity"
+    }
+}
+
+pub fn idle_reason(idle_reason: IdleReason) -> &'static str {
+    match idle_reason {
+        IdleReason::None => "None",
+        IdleReason::PlayerSet => "PlayerSet",
+        IdleReason::InternalStorageFull => "Internal Storage Full",
+        IdleReason::FactoryProductionComplete => "Factory Production Complete",
+        IdleReason::FactoryInsufficientResources => "Factory Insufficient Resources",
+        IdleReason::FactoryInsufficientRobotCommandCapacity => "Factory Insufficient Robot Command Capacity",
+        IdleReason::FactoryInsufficientWarehouseSpace => "Factory Insufficient Warehouse Space",
+        IdleReason::MineExhausted => "Mine Exhausted",
+        IdleReason::MineInactive => "Mine Inactive",
+        IdleReason::InsufficientLuxuryProduct => "Insufficient Luxury Product"
+    }
+}
+
+pub fn structure_color_from_index(structure_state: StructureState) -> Color {
+   structure_color_table(structure_state)
+}
+
+pub fn structure_text_color_from_index(structure_state: StructureState) -> Color {
+    structure_text_color_table(structure_state)
+}
+
+pub fn check_save_game_version(filename: &str) {
+    open_save_game(filename)
+}
+
+// /**
+//  * Open a saved game and validate version.
+//  *
+//  * \throws	Throws a std::runtime_error if there are any errors with a savegame version, formation or missing root nodes.
+//  */
+// NAS2D::Xml::XmlDocument openSavegame(const std::string& filename)
+// {
+// auto xmlDocument = openXmlFile(filename, constants::SaveGameRootNode);
+//
+// auto savegameVersion = xmlDocument.firstChildElement(constants::SaveGameRootNode)->attribute("version");
+//
+// if (savegameVersion != constants::SaveGameVersion)
+// {
+// throw std::runtime_error("Savegame version mismatch: '" + filename + "'. Expected " + constants::SaveGameVersion + ", found " + savegameVersion + ".");
+// }
+//
+// return xmlDocument;
+// }
+pub fn open_save_game(filename: &str) -> SaveGame {
+    todo!()
+}
+
+pub fn set_mean_solar_distance(context: &mut AppContext, &new_mean_solar_distance: f32) {
+    if new_mean_solar_distance < 0.0 {
+        panic!("mean solar distance must be greater than 0.0");
+    }
+    app_context.mean_solar_distance = new_mean_solar_distance;
+}
+
+pub fn draw_progress_bar(app_context: &mut AppContext, value: i32, max: i32, rect: Rectangle<i32>, padding: i32)
+{
+    let clipped_value = i32::clamp(value, 0, max);
+    let renderer = app_context.renderer.get_mut();
+    renderer.draw_box(rect, Color::new(0,185,0,255));
+    if max > 0 {
+        let mut inner_rect = rect.inset(padding);
+        inner_rect.size.x *= clipped_value / max;
+        renderer.draw_box_filled(inner_rect, Color::new(0,100,0,255));
+    }
+}
+
+pub fn get_truck_availability(ctx: &mut AppContext) -> i32 {
+    let mut trucks_available = 0i32;
+    let warehouse_list = ctx.structure_manager.get_structures(Warehouse);
+    for warehouse in warehouse_list {
+        trucks_available += warehouse.products.count(ProductType::PRODUCT_TRUCK)
+    }
+    trucks_available
+}
+
 
 /**
  * Terrain type enumeration

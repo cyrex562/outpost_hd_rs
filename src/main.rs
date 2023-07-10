@@ -18,6 +18,12 @@ mod delegate;
 mod common;
 mod rectangle;
 mod strings;
+mod save_game;
+mod app_context;
+mod renderer;
+mod window;
+mod ui_container;
+mod control;
 
 fn main() {
     println!("Hello, world!");

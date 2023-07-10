@@ -190,6 +190,7 @@ const std::map<std::array<bool, 4>, std::string> IntersectionPatternTable =
 	{{false, true, true, true}, "intersection"},
 	{{true, true, true, false}, "intersection"},
 	{{true, true, true, true}, "intersection"},
+
 	{{true, false, false, true}, "intersection"},
 	{{false, true, true, false}, "intersection"},
 
