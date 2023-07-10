@@ -61,5 +61,7 @@ impl Control {
         self.rect.position.clone()
     }
 
-    pub fn 
+    pub fn draw(&mut self) {
+        todo!()
+    }
 }
